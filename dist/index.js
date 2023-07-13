@@ -12502,8 +12502,8 @@ class TestOutputError extends TestError {
     expected;
     actual;
     constructor(message, expected, actual) {
-	this.text = message;
         super(`${message}\nExpected:\n${expected}\nActual:\n${actual}`);
+	this.text = message;
         this.expected = expected;
         this.actual = actual;
         Error.captureStackTrace(this, TestOutputError);
