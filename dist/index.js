@@ -12498,9 +12498,11 @@ class TestTimeoutError extends TestError {
 }
 exports.TestTimeoutError = TestTimeoutError;
 class TestOutputError extends TestError {
+    text;
     expected;
     actual;
     constructor(message, expected, actual) {
+	this.text = message;
         super(`${message}\nExpected:\n${expected}\nActual:\n${actual}`);
         this.expected = expected;
         this.actual = actual;
@@ -12667,7 +12669,7 @@ const runAll = async (tests, cwd) => {
             log('');
             log(color.red(`❌ ${test.name}`));
 	    if (error instanceof TestOutputError) {
-		const message = {message: error.message, expected: error.expected, actual: error.actual};
+		const message = {message: error.text, expected: error.expected, actual: error.actual};
 	        messages.push(message);
 	    }
 		
