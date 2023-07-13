@@ -12690,7 +12690,8 @@ const runAll = async (tests, cwd) => {
     if (hasPoints) {
         const text = `Points ${points}/${availablePoints}`;
         log(color.bold.bgCyan.black(text));
-        core.setOutput('Points', `${points}/${availablePoints}`);
+        core.setOutput('Points', `${points}: ${availablePoints}`);
+	core.setOutput('Message', 'foobar');
         await (0, output_1.setCheckRunOutput)(text);
     }
 };
