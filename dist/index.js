@@ -12636,6 +12636,7 @@ const run = async (test, cwd) => {
 };
 exports.run = run;
 const runAll = async (tests, cwd) => {
+    let messages = '';
     let points = 0;
     let availablePoints = 0;
     let hasPoints = false;
@@ -12667,6 +12668,7 @@ const runAll = async (tests, cwd) => {
             log(color.red(`❌ ${test.name}`));
             if (error instanceof Error) {
                 core.setFailed(error.message);
+		messages += error.message;
             }
             else {
                 core.setFailed(`Failed to run test '${test.name}'`);
@@ -12691,7 +12693,7 @@ const runAll = async (tests, cwd) => {
         const text = `Points ${points}/${availablePoints}`;
         log(color.bold.bgCyan.black(text));
         core.setOutput('Points', `${points}: ${availablePoints}`);
-	core.setOutput('Message', 'foobar');
+	core.setOutput('Message', messages);
         await (0, output_1.setCheckRunOutput)(text);
     }
 };
