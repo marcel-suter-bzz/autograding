@@ -12636,7 +12636,7 @@ const run = async (test, cwd) => {
 };
 exports.run = run;
 const runAll = async (tests, cwd) => {
-    let messages = '';
+    let messages = [];
     let points = 0;
     let availablePoints = 0;
     let hasPoints = false;
@@ -12666,10 +12666,14 @@ const runAll = async (tests, cwd) => {
             failed = true;
             log('');
             log(color.red(`❌ ${test.name}`));
+	    if (error instance TestOutputError) {
+		const message = {message: error.message, expected: error.expected, actual: error.actual};
+	        messages.push(message);
+	    }
+		
             if (error instanceof Error) {
                 core.setFailed(error.message);
-		messages += error.message;
-            }
+            } 
             else {
                 core.setFailed(`Failed to run test '${test.name}'`);
             }
@@ -12693,7 +12697,7 @@ const runAll = async (tests, cwd) => {
         const text = `Points ${points}/${availablePoints}`;
         log(color.bold.bgCyan.black(text));
         core.setOutput('Points', `${points}: ${availablePoints}`);
-	core.setOutput('Message', messages);
+	core.setOutput('Messages', messages);
         await (0, output_1.setCheckRunOutput)(text);
     }
 };
