@@ -12666,7 +12666,7 @@ const runAll = async (tests, cwd) => {
             failed = true;
             log('');
             log(color.red(`❌ ${test.name}`));
-	    if (error instance TestOutputError) {
+	    if (error instanceof TestOutputError) {
 		const message = {message: error.message, expected: error.expected, actual: error.actual};
 	        messages.push(message);
 	    }
